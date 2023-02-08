@@ -11,7 +11,7 @@ import Foundation
 
 public class Module: ObservableObject {
     
-    public static var shared: Module { Module() }
+    public init() { }
     
     public func createMainView() -> MainView {
         MainView(

@@ -11,13 +11,13 @@ public protocol MainAPI {
     func items(atPage page: Int) async -> Result<[Item], APIError>
 }
 
-class MainService: APICaller, MainAPI {
+public class MainService: APICaller, MainAPI {
     
-    init() {}
+    public init() {}
     
     var baseUrl: String { "https://picsum.photos/v2" }
     
-    func items(atPage page: Int) async -> Result<[Item], APIError> {
+    public func items(atPage page: Int) async -> Result<[Item], APIError> {
         await httpGet(for: "list?page=\(page)")
     }
 }
