@@ -23,7 +23,7 @@ class MainViewModel: ObservableObject {
     
     // override this
     func destination(for item: LabeledImageModel) -> some View {
-        Text(item.content)
+        Text("Override this for navigation")
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A30109829939DA000A6EC26 /* DetailFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 3A30109729939DA000A6EC26 /* DetailFeature */; };
 		3A5DDE0929934CFF0049D98E /* CommonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0829934CFF0049D98E /* CommonUI */; };
 		3A5DDE0B29934D030049D98E /* MainFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0A29934D030049D98E /* MainFeature */; };
 		3A5DDE0D29934D070049D98E /* CommonUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0C29934D070049D98E /* CommonUtilities */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A30109629939D8E00A6EC26 /* DetailFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DetailFeature; sourceTree = "<group>"; };
 		3A5DDE0E2993524C0049D98E /* CommonNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonNetworking; sourceTree = "<group>"; };
 		3AD3AEED29931B220095CB14 /* Sequis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sequis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3AEF029931B220095CB14 /* SequisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisApp.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5DDE0D29934D070049D98E /* CommonUtilities in Frameworks */,
+				3A30109829939DA000A6EC26 /* DetailFeature in Frameworks */,
 				3A5DDE1029935D000049D98E /* CommonNetworking in Frameworks */,
 				3A5DDE0B29934D030049D98E /* MainFeature in Frameworks */,
 				3A5DDE0929934CFF0049D98E /* CommonUI in Frameworks */,
@@ -160,6 +163,7 @@
 		3AD3AF1B29931B8E0095CB14 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				3A30109629939D8E00A6EC26 /* DetailFeature */,
 				3AD3AF1E29931BFA0095CB14 /* MainFeature */,
 			);
 			path = Features;
@@ -196,6 +200,7 @@
 				3A5DDE0A29934D030049D98E /* MainFeature */,
 				3A5DDE0C29934D070049D98E /* CommonUtilities */,
 				3A5DDE0F29935D000049D98E /* CommonNetworking */,
+				3A30109729939DA000A6EC26 /* DetailFeature */,
 			);
 			productName = Sequis;
 			productReference = 3AD3AEED29931B220095CB14 /* Sequis.app */;
@@ -639,6 +644,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A30109729939DA000A6EC26 /* DetailFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DetailFeature;
+		};
 		3A5DDE0829934CFF0049D98E /* CommonUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonUI;
