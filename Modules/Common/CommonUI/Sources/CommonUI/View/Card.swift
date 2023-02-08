@@ -18,7 +18,7 @@ public struct Card<Content>: View where Content: View {
     public var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(.foreground)
+                .foregroundColor(.appBackground)
             content()
         }
         .defaultCornerRadius()

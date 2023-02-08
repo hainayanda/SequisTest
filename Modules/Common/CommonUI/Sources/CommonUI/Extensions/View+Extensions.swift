@@ -21,7 +21,7 @@ public extension View {
         cornerRadius(20)
     }
     
-    func textColor() -> some View {
-        foregroundColor(.text)
+    func defaultTextColor() -> some View {
+        foregroundColor(.appText)
     }
 }

@@ -10,21 +10,25 @@ import SwiftUI
 
 public extension Color {
     
-    static var shadow: Color { .text.opacity(0.2) }
+    static var shadow: Color { .appText.opacity(0.2) }
     
-    static var foreground: Color {
+    static var appBackground: Color {
         Color("foreground", bundle: .module)
     }
     
-    static var text: Color {
+    static var appText: Color {
         Color("text", bundle: .module)
     }
     
-    static var primary: Color {
+    static var appPrimary: Color {
         Color("primary", bundle: .module)
     }
     
-    static var secondary: Color {
+    static var appSecondary: Color {
         Color("secondary", bundle: .module)
+    }
+    
+    static var appTertiary: Color {
+        Color("tertiary", bundle: .module)
     }
 }

@@ -41,7 +41,9 @@ struct LabeledImageCard: View {
                     .innerCornerRadius()
                 VStack(alignment: .leading) {
                     Title2(viewModel.title)
+                        .foregroundColor(.appPrimary)
                     Text(viewModel.content)
+                        .defaultTextColor()
                     Spacer()
                 }
                 .padding()
