@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
+import CommonUI
 
 struct LabeledImageCard: View {
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(.white)
+        Card {
             HStack {
                 Image("Test", bundle: .module)
                     .resizable()
                     .frame(width: 100, height: 100)
-                    .cornerRadius(20)
+                    .innerCornerRadius()
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("Author")
@@ -32,8 +31,6 @@ struct LabeledImageCard: View {
             .padding()
         }
         .frame(height: 124)
-        .cornerRadius(25)
-        .shadow(color: .black.opacity(0.2), radius: 10)
     }
 }
 
