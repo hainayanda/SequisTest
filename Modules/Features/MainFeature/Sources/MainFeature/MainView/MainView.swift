@@ -16,6 +16,22 @@ class MainViewModel: ObservableObject {
     init(items: [LabeledImageModel]) {
         self.items = items
     }
+    
+    // override this
+    func onAppear(for item: LabeledImageModel) {
+        guard item.id == items.last?.id else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.items.append(
+                LabeledImageModel(
+                    id: "\(Int.random(in: 1000..<2000))",
+                    image: Bundle.module.image(name: "Test"),
+                    title: "Author",
+                    content: "Karen Armstrong"
+                )
+            )
+        }
+    }
 }
 
 // MARK: MainView
@@ -35,6 +51,9 @@ public struct MainView: View {
                     LabeledImageCard(
                         viewModel: item
                     )
+                    .onAppear {
+                        viewModel.onAppear(for: item)
+                    }
                 }
             }
             .padding()
