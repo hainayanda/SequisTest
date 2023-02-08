@@ -62,6 +62,16 @@ public struct ImageCompatible: View {
         self.resizeValue = nil
     }
     
+    public init(url: String) {
+        self.type = .url(URL(string: url))
+        self.resizeValue = nil
+    }
+    
+    public init(url: URL?) {
+        self.type = .url(url)
+        self.resizeValue = nil
+    }
+    
     init(type: ImageConvertibleType, resizeValue: ResizeValue) {
         self.type = type
         self.resizeValue = resizeValue

@@ -22,6 +22,10 @@ public extension Color {
         Color("text", bundle: .module)
     }
     
+    static var appConstrastText: Color {
+        Color("constrastText", bundle: .module)
+    }
+    
     static var appPrimary: Color {
         Color("primary", bundle: .module)
     }
