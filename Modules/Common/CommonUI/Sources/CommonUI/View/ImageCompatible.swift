@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CachedAsyncImage
 
 // MARK: ImageConvertibleType
 
@@ -71,7 +72,7 @@ public struct ImageCompatible: View {
         case .asset(let name, let bundle):
             makeResizableIfNeeded(for: Image(name, bundle: bundle))
         case .url(let url):
-            AsyncImage(url: url) { image in
+            CachedAsyncImage(url: url) { image in
                 makeResizableIfNeeded(for: image)
             } placeholder: {
                 ProgressView()

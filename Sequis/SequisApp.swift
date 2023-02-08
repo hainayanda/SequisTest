@@ -25,6 +25,8 @@ struct SequisApp: App {
     }
     
     init() {
+        URLCache.shared.memoryCapacity = 52_428_800
+        URLCache.shared.diskCapacity = 104_857_600
         Injector.shared.addTransient(for: MainAPI.self, CommonNetworking.Module.shared.mainAPI)
     }
 }
