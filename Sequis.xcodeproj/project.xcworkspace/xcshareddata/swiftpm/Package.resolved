@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "fakery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vadymmarkov/Fakery.git",
+      "state" : {
+        "revision" : "71cb3bf36a808534659d1248780c2bf3c4c4fc91",
+        "version" : "5.1.0"
+      }
+    },
+    {
       "identity" : "impose",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hainayanda/Impose.git",

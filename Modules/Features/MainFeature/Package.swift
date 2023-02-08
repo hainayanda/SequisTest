@@ -28,7 +28,8 @@ let package = Package(
         .testTarget(
             name: "MainFeatureTests",
             dependencies: ["MainFeature",
-                .product(name: "CommonTestUtilities", package: "CommonUtilities")
+                .product(name: "CommonTestUtilities", package: "CommonUtilities"),
+                .product(name: "CommonNetworkingMock", package: "CommonNetworking")
             ]
         )
     ]

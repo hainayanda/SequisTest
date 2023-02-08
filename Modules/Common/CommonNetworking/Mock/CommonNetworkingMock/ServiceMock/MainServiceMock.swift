@@ -10,10 +10,14 @@ import CommonNetworking
 
 public class MainServiceMock: MainAPI {
     
-    var delay: Duration? = nil
+    public init() { }
     
-    var itemsResult: Result<[Item], APIError> = .failure(.unexpectedStatusCode(-1))
+    public var delay: Duration? = nil
+    
+    public var pageRequested: Int?
+    public var itemsResult: Result<[Item], APIError> = .failure(.unexpectedStatusCode(-1))
     public func items(atPage page: Int) async -> Result<[CommonNetworking.Item], CommonNetworking.APIError> {
+        self.pageRequested = page
         guard let delay else {
             return itemsResult
         }
