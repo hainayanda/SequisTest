@@ -10,7 +10,7 @@ import MainFeature
 
 struct ContentView: View {
     
-    @EnvironmentObject var mainModule: MainFeatureModule
+    @EnvironmentObject var mainModule: MainFeature.Module
     
     var body: some View {
         NavigationView {
@@ -22,6 +22,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(MainFeatureModule.shared)
+            .environmentObject(MainFeature.Module.shared)
     }
 }

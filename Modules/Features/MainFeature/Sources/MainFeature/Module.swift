@@ -9,9 +9,9 @@ import Foundation
 
 // MARK: Factory
 
-public class MainFeatureModule: ObservableObject {
+public class Module: ObservableObject {
     
-    public static var shared: MainFeatureModule { MainFeatureModule() }
+    public static var shared: Module { Module() }
     
     public func createMainView() -> MainView {
         MainView(

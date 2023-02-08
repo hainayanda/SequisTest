@@ -7,13 +7,15 @@
 
 import SwiftUI
 import MainFeature
+import CommonNetworking
 
 @main
 struct SequisApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(MainFeatureModule.shared)
+                .environmentObject(MainFeature.Module.shared)
+                .environmentObject(CommonNetworking.Module.shared)
         }
     }
 }
