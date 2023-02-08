@@ -14,8 +14,8 @@ public class Module: ObservableObject {
     public init() { }
     
     public func createMainView() -> MainView {
-        MainView(
-            viewModel: MainViewVM()
-        )
+        let router = MainViewRouter()
+        let vm = MainViewVM(router: router)
+        return MainView(viewModel: vm)
     }
 }

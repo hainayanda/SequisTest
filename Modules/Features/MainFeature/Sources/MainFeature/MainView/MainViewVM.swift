@@ -7,16 +7,21 @@
 
 import Foundation
 import SwiftUI
+import CommonUI
 import Impose
 import CommonNetworking
+import CommonUtilities
 
 class MainViewVM: MainViewModel {
     
     @Injected private var service: MainAPI
+    private var router: MainViewRouting
+    
     private var items: [Item] = []
     private var page: Int = 0
     
-    init() {
+    init(router: MainViewRouting) {
+        self.router = router
         super.init(items: [])
         loadPage(0)
     }
@@ -24,6 +29,14 @@ class MainViewVM: MainViewModel {
     override func onAppear(for item: LabeledImageModel) {
         guard labeledImages.last?.id == item.id else { return }
         loadPage(page + 1)
+    }
+    
+    override func destination(for item: LabeledImageModel) -> AnyView {
+        guard let index = labeledImages.firstIndex(where: { $0.id == item.id }),
+                let itemFound = items[safe: index] else {
+            return AnyView(Text("Something Happened"))
+        }
+        return router.destination(for: itemFound)
     }
     
     func loadPage(_ page: Int) {

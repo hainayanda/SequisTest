@@ -22,8 +22,8 @@ class MainViewModel: ObservableObject {
     func onAppear(for item: LabeledImageModel) { }
     
     // override this
-    func destination(for item: LabeledImageModel) -> some View {
-        Text("Override this for navigation")
+    func destination(for item: LabeledImageModel) -> AnyView {
+        AnyView(Text("Override this for navigation"))
     }
 }
 
