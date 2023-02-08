@@ -10,34 +10,30 @@ import CommonUI
 
 // MARK: MainViewModel
 
-protocol CardItem: Identifiable {
-    var image: ImageConvertible { get }
-    var title: String { get }
-    var content: String { get }
-}
-
 class MainViewModel: ObservableObject {
-    @Published private(set) var items: [any CardItem] = []
+    @Published private(set) var items: [LabeledImageModel] = []
+    
+    init(items: [LabeledImageModel]) {
+        self.items = items
+    }
 }
 
 struct MainView: View {
+    
+    @ObservedObject var viewModel: MainViewModel
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 24) {
-                LabeledImageCard(
-                    viewModel: .init(
-                        image: Bundle.module.image(name: "Test"),
-                        title: "Author",
-                        content: "Amelia Earheart"
+                ForEach(viewModel.items) { item in
+                    LabeledImageCard(
+                        viewModel: item
                     )
-                )
-                LabeledImageCard(
-                    viewModel: .init(
-                        image: Bundle.module.image(name: "Test"),
-                        title: "Author",
-                        content: "Amelia Earheart"
-                    )
-                )
+                }
             }
             .padding()
         }
@@ -46,6 +42,17 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(
+            viewModel: MainViewModel(
+                items: (0..<20).map {
+                    LabeledImageModel(
+                        id: "\($0)",
+                        image: Bundle.module.image(name: "Test"),
+                        title: "Author",
+                        content: "Amelia Earheart"
+                    )
+                }
+            )
+        )
     }
 }

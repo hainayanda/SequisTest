@@ -10,12 +10,16 @@ import CommonUI
 
 // MARK: LabeledImageModel
 
-class LabeledImageModel: ObservableObject {
+class LabeledImageModel: ObservableObject, Identifiable {
+    typealias ID = String
+    
+    let id: String
     @Published var image: ImageConvertible
     @Published var title: String
     @Published var content: String
     
-    init(image: ImageConvertible, title: String, content: String) {
+    init(id: String, image: ImageConvertible, title: String, content: String) {
+        self.id = id
         self.image = image
         self.title = title
         self.content = content
@@ -61,6 +65,7 @@ struct LabeledImageCard_Previews: PreviewProvider {
     static var previews: some View {
         LabeledImageCard(
             viewModel: .init(
+                id: "test",
                 image: Bundle.module.image(name: "Test"),
                 title: "Author",
                 content: "Amelia Earheart"
