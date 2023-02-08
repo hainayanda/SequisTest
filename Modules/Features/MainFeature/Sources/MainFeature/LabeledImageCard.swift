@@ -11,11 +11,11 @@ import CommonUI
 // MARK: LabeledImageModel
 
 class LabeledImageModel: ObservableObject {
-    @Published var image: Image
+    @Published var image: ImageConvertible
     @Published var title: String
     @Published var content: String
     
-    init(image: Image, title: String, content: String) {
+    init(image: ImageConvertible, title: String, content: String) {
         self.image = image
         self.title = title
         self.content = content
@@ -35,7 +35,7 @@ struct LabeledImageCard: View {
     var body: some View {
         Card {
             HStack {
-                viewModel.image
+                ImageCompatible(viewModel.image)
                     .resizable()
                     .frame(width: 100, height: 100)
                     .innerCornerRadius()
@@ -61,7 +61,7 @@ struct LabeledImageCard_Previews: PreviewProvider {
     static var previews: some View {
         LabeledImageCard(
             viewModel: .init(
-                image: Image("Test", bundle: .module),
+                image: Bundle.module.image(name: "Test"),
                 title: "Author",
                 content: "Amelia Earheart"
             )
