@@ -5,19 +5,22 @@ import PackageDescription
 
 let package = Package(
     name: "CommonNetworking",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CommonNetworking",
-            targets: ["CommonNetworking"]),
+            targets: ["CommonNetworking"]
+        ),
+        .library(
+            name: "CommonNetworkingMock",
+            targets: ["CommonNetworkingMock"]
+        )
     ],
     dependencies: [
-        .package(name: "CommonUtilities", path: "../CommonUtilities"),
-        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "6.1.0")),
-        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "11.2.1"))
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "CommonUtilities", path: "../CommonUtilities")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,8 +28,20 @@ let package = Package(
         .target(
             name: "CommonNetworking",
             dependencies: ["CommonUtilities"]),
+        .target(
+            name: "CommonNetworkingMock",
+            dependencies: [
+                "CommonNetworking",
+                .product(name: "CommonTestUtilities", package: "CommonUtilities")
+            ],
+            path: "Mock/CommonNetworkingMock"
+        ),
         .testTarget(
             name: "CommonNetworkingTests",
-            dependencies: ["CommonNetworking", "Quick", "Nimble"]),
+            dependencies: [
+                "CommonNetworking",
+                .product(name: "CommonTestUtilities", package: "CommonUtilities")
+            ]
+        ),
     ]
 )

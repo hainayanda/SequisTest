@@ -16,7 +16,6 @@ class MainViewVM: MainViewModel {
     private var items: [Item] = []
     private var page: Int = 0
     
-    
     init() {
         super.init(items: [])
         loadPage(0)

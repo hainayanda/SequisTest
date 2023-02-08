@@ -5,11 +5,17 @@ import PackageDescription
 
 let package = Package(
     name: "CommonUtilities",
+    platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CommonUtilities",
-            targets: ["CommonUtilities"]),
+            targets: ["CommonUtilities"]
+        ),
+        .library(
+            name: "CommonTestUtilities",
+            targets: ["CommonTestUtilities"]
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,8 +30,12 @@ let package = Package(
         .target(
             name: "CommonUtilities",
             dependencies: ["Impose"]),
+        .target(
+            name: "CommonTestUtilities",
+            dependencies: ["CommonUtilities", "Quick", "Nimble"],
+            path: "TestUtilities/CommonTestUtilities"),
         .testTarget(
             name: "CommonUtilitiesTests",
-            dependencies: ["CommonUtilities", "Quick", "Nimble"]),
+            dependencies: ["CommonUtilities", "CommonTestUtilities"]),
     ]
 )
