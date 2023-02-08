@@ -19,9 +19,7 @@ struct LabeledImageCard: View {
                     .innerCornerRadius()
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("Author")
-                        .font(.title2)
-                        .bold()
+                    Title2("Author")
                     Text("Amelia Earheart")
                     Spacer()
                 }
