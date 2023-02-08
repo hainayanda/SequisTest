@@ -20,6 +20,11 @@ class MainViewModel: ObservableObject {
     
     // override this
     func onAppear(for item: LabeledImageModel) { }
+    
+    // override this
+    func destination(for item: LabeledImageModel) -> some View {
+        Text(item.content)
+    }
 }
 
 // MARK: MainView
@@ -36,11 +41,12 @@ public struct MainView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 24) {
                 ForEach(viewModel.items) { item in
-                    LabeledImageCard(
-                        viewModel: item
-                    )
-                    .onAppear {
-                        viewModel.onAppear(for: item)
+                    NavigationLink(destination: viewModel.destination(for: item)) {
+                        LabeledImageCard(
+                            viewModel: item
+                        ).onAppear {
+                            viewModel.onAppear(for: item)
+                        }
                     }
                 }
             }
