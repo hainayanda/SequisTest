@@ -20,4 +20,8 @@ public extension View {
     func innerCornerRadius() -> some View {
         cornerRadius(20)
     }
+    
+    func textColor() -> some View {
+        foregroundColor(.text)
+    }
 }
