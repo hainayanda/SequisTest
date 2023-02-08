@@ -45,6 +45,7 @@
 		3AD3AF0B29931B240095CB14 /* SequisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisUITests.swift; sourceTree = "<group>"; };
 		3AD3AF0D29931B240095CB14 /* SequisUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3AD3AF1E29931BFA0095CB14 /* MainFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MainFeature; sourceTree = "<group>"; };
+		3AD3AF1F299326B50095CB14 /* CommonUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +150,7 @@
 		3AD3AF1C29931B960095CB14 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3AD3AF1F299326B50095CB14 /* CommonUI */,
 			);
 			path = Common;
 			sourceTree = "<group>";
