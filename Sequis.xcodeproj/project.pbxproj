@@ -44,6 +44,7 @@
 		3AD3AF0729931B240095CB14 /* SequisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SequisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3AF0B29931B240095CB14 /* SequisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisUITests.swift; sourceTree = "<group>"; };
 		3AD3AF0D29931B240095CB14 /* SequisUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3AD3AF1E29931BFA0095CB14 /* MainFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MainFeature; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		3AD3AEE429931B220095CB14 = {
 			isa = PBXGroup;
 			children = (
+				3AD3AF1A29931B7F0095CB14 /* Modules */,
 				3AD3AEEF29931B220095CB14 /* Sequis */,
 				3AD3AF0029931B240095CB14 /* SequisTests */,
 				3AD3AF0A29931B240095CB14 /* SequisUITests */,
@@ -125,6 +127,30 @@
 				3AD3AF0D29931B240095CB14 /* SequisUITestsLaunchTests.swift */,
 			);
 			path = SequisUITests;
+			sourceTree = "<group>";
+		};
+		3AD3AF1A29931B7F0095CB14 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3AF1C29931B960095CB14 /* Common */,
+				3AD3AF1B29931B8E0095CB14 /* Features */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3AD3AF1B29931B8E0095CB14 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3AF1E29931BFA0095CB14 /* MainFeature */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		3AD3AF1C29931B960095CB14 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
