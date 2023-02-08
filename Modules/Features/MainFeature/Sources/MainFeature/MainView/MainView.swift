@@ -12,10 +12,10 @@ import CommonUI
 
 class MainViewModel: ObservableObject {
     
-    @Published var items: [LabeledImageModel] = []
+    @Published var labeledImages: [LabeledImageModel] = []
     
     init(items: [LabeledImageModel]) {
-        self.items = items
+        self.labeledImages = items
     }
     
     // override this
@@ -40,7 +40,7 @@ public struct MainView: View {
     public var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 24) {
-                ForEach(viewModel.items) { item in
+                ForEach(viewModel.labeledImages) { item in
                     NavigationLink(destination: viewModel.destination(for: item)) {
                         LabeledImageCard(
                             viewModel: item

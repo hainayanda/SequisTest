@@ -12,8 +12,10 @@ import CommonNetworking
 
 class MainViewVM: MainViewModel {
     
-    @Injected var service: MainAPI
+    @Injected private var service: MainAPI
+    private var items: [Item] = []
     private var page: Int = 0
+    
     
     init() {
         super.init(items: [])
@@ -21,7 +23,7 @@ class MainViewVM: MainViewModel {
     }
     
     override func onAppear(for item: LabeledImageModel) {
-        guard items.last?.id == item.id else { return }
+        guard labeledImages.last?.id == item.id else { return }
         loadPage(page + 1)
     }
     
@@ -31,8 +33,9 @@ class MainViewVM: MainViewModel {
             switch await self.service.items(atPage: page) {
             case .success(let items):
                 self.page = page
-                RunLoop.main.perform {
-                    self.items.append(contentsOf: items.toLabelImageModels(page: page))
+                self.items = items
+                RunLoop.main.perform { [weak self] in
+                    self?.labeledImages.append(contentsOf: items.toLabelImageModels(page: page))
                 }
             case .failure(let reason):
                 print(reason)

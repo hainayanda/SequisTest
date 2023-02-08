@@ -10,27 +10,20 @@ import CommonUI
 
 // MARK: LabeledImageModel
 
-class LabeledImageModel: ObservableObject, Identifiable {
+struct LabeledImageModel: Identifiable {
     typealias ID = String
     
     let id: String
-    @Published var image: ImageConvertible
-    @Published var title: String
-    @Published var content: String
-    
-    init(id: String, image: ImageConvertible, title: String, content: String) {
-        self.id = id
-        self.image = image
-        self.title = title
-        self.content = content
-    }
+    let image: ImageConvertible
+    let title: String
+    let content: String
 }
 
 // MARK: LabeledImageCard
 
 struct LabeledImageCard: View {
     
-    @ObservedObject var viewModel: LabeledImageModel
+    let viewModel: LabeledImageModel
     
     init(viewModel: LabeledImageModel) {
         self.viewModel = viewModel
