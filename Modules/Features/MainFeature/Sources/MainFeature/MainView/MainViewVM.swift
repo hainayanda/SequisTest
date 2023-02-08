@@ -26,27 +26,29 @@ class MainViewVM: MainViewModel {
     }
     
     func loadPage(_ page: Int) {
-        Task {
-            switch await service.items(atPage: page) {
+        Task.detached { [weak self] in
+            guard let self = self else { return }
+            switch await self.service.items(atPage: page) {
             case .success(let items):
                 self.page = page
-                self.items.append(contentsOf: items.toLabelImageModels())
+                RunLoop.main.perform {
+                    self.items.append(contentsOf: items.toLabelImageModels(page: page))
+                }
             case .failure(let reason):
                 print(reason)
             }
-            
         }
     }
 }
 
 private extension Array where Element == Item {
-    func toLabelImageModels() -> [LabeledImageModel] {
-        map { $0.toLabelImageModel() }
+    func toLabelImageModels(page: Int) -> [LabeledImageModel] {
+        map { $0.toLabelImageModel(page: page) }
     }
 }
 
 private extension Item {
-    func toLabelImageModel() -> LabeledImageModel {
-        LabeledImageModel(id: id, image: URL(string: url), title: "Author", content: author)
+    func toLabelImageModel(page: Int) -> LabeledImageModel {
+        LabeledImageModel(id: "\(page)_\(id)", image: URL(string: downloadURL), title: "Author", content: author)
     }
 }

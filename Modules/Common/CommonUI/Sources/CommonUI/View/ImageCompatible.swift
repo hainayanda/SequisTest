@@ -61,7 +61,7 @@ public struct ImageCompatible: View {
         self.resizeValue = nil
     }
     
-    init(_ type: ImageConvertibleType, resizeValue: ResizeValue) {
+    init(type: ImageConvertibleType, resizeValue: ResizeValue) {
         self.type = type
         self.resizeValue = resizeValue
     }
@@ -71,7 +71,11 @@ public struct ImageCompatible: View {
         case .asset(let name, let bundle):
             makeResizableIfNeeded(for: Image(name, bundle: bundle))
         case .url(let url):
-            AsyncImage(url: url)
+            AsyncImage(url: url) { image in
+                makeResizableIfNeeded(for: image)
+            } placeholder: {
+                ProgressView()
+            }
         case .system(let name):
             makeResizableIfNeeded(for: Image(systemName: name))
         case .uiImage(let image):
@@ -89,7 +93,13 @@ public struct ImageCompatible: View {
     }
     
     public func resizable(capInsets: EdgeInsets = EdgeInsets(), resizingMode: Image.ResizingMode = .stretch) -> ImageCompatible {
-        return ImageCompatible(type, resizeValue: ResizeValue(capInsets: capInsets, resizingMode: resizingMode))
+        return ImageCompatible(
+            type: type,
+            resizeValue: ResizeValue(
+                capInsets: capInsets,
+                resizingMode: resizingMode
+            )
+        )
     }
 }
 
@@ -99,5 +109,6 @@ struct ImageCompatible_Previews: PreviewProvider {
     static var previews: some View {
         ImageCompatible(Bundle.module.image(name: "Test"))
             .resizable()
+            .aspectRatio(contentMode: .fit)
     }
 }

@@ -48,6 +48,7 @@ public struct MainView: View {
         }
         .navigationTitle("Image List")
         .navigationBarTitleDisplayMode(.large)
+        .background(Color.appBackground)
     }
 }
 

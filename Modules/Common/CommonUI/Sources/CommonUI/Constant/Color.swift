@@ -10,7 +10,9 @@ import SwiftUI
 
 public extension Color {
     
-    static var shadow: Color { .appText.opacity(0.2) }
+    static var shadow: Color {
+        Color("shadow", bundle: .module)
+    }
     
     static var appBackground: Color {
         Color("foreground", bundle: .module)

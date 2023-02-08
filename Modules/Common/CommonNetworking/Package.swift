@@ -13,7 +13,9 @@ let package = Package(
             targets: ["CommonNetworking"]),
     ],
     dependencies: [
-        .package(name: "CommonUtilities", path: "../CommonUtilities")
+        .package(name: "CommonUtilities", path: "../CommonUtilities"),
+        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "6.1.0")),
+        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "11.2.1"))
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -22,9 +24,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CommonNetworking",
-            dependencies: []),
+            dependencies: ["CommonUtilities"]),
         .testTarget(
             name: "CommonNetworkingTests",
-            dependencies: ["CommonNetworking"]),
+            dependencies: ["CommonNetworking", "Quick", "Nimble"]),
     ]
 )

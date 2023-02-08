@@ -41,6 +41,7 @@ struct LabeledImageCard: View {
             HStack {
                 ImageCompatible(viewModel.image)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 100, height: 100)
                     .innerCornerRadius()
                 VStack(alignment: .leading) {

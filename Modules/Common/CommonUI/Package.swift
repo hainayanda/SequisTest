@@ -13,7 +13,9 @@ let package = Package(
             targets: ["CommonUI"]),
     ],
     dependencies: [
-        .package(name: "CommonUtilities", path: "../CommonUtilities")
+        .package(name: "CommonUtilities", path: "../CommonUtilities"),
+        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "6.1.0")),
+        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "11.2.1"))
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -25,6 +27,6 @@ let package = Package(
             dependencies: ["CommonUtilities"]),
         .testTarget(
             name: "CommonUITests",
-            dependencies: ["CommonUI"]),
+            dependencies: ["CommonUI", "Quick", "Nimble"]),
     ]
 )
