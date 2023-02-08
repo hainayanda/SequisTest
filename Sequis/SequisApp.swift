@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import MainFeature
 
 @main
 struct SequisApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(MainFeatureModule.shared)
         }
     }
 }

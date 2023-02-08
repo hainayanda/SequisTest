@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
+import MainFeature
 
 struct ContentView: View {
+    
+    @EnvironmentObject var mainModule: MainFeatureModule
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            mainModule.createMainView()
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(MainFeatureModule.shared)
     }
 }
