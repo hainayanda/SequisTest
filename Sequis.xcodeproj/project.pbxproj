@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5DDE0929934CFF0049D98E /* CommonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0829934CFF0049D98E /* CommonUI */; };
+		3A5DDE0B29934D030049D98E /* MainFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0A29934D030049D98E /* MainFeature */; };
+		3A5DDE0D29934D070049D98E /* CommonUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0C29934D070049D98E /* CommonUtilities */; };
+		3A5DDE1029935D000049D98E /* CommonNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5DDE0F29935D000049D98E /* CommonNetworking */; };
 		3AD3AEF129931B220095CB14 /* SequisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3AEF029931B220095CB14 /* SequisApp.swift */; };
 		3AD3AEF329931B220095CB14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3AEF229931B220095CB14 /* ContentView.swift */; };
 		3AD3AEF529931B240095CB14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD3AEF429931B240095CB14 /* Assets.xcassets */; };
@@ -34,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A5DDE0E2993524C0049D98E /* CommonNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonNetworking; sourceTree = "<group>"; };
 		3AD3AEED29931B220095CB14 /* Sequis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sequis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD3AEF029931B220095CB14 /* SequisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisApp.swift; sourceTree = "<group>"; };
 		3AD3AEF229931B220095CB14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +51,7 @@
 		3AD3AF0D29931B240095CB14 /* SequisUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequisUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3AD3AF1E29931BFA0095CB14 /* MainFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MainFeature; sourceTree = "<group>"; };
 		3AD3AF1F299326B50095CB14 /* CommonUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonUI; sourceTree = "<group>"; };
+		3AD3AF2029933F0F0095CB14 /* CommonUtilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonUtilities; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5DDE0D29934D070049D98E /* CommonUtilities in Frameworks */,
+				3A5DDE1029935D000049D98E /* CommonNetworking in Frameworks */,
+				3A5DDE0B29934D030049D98E /* MainFeature in Frameworks */,
+				3A5DDE0929934CFF0049D98E /* CommonUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +83,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A5DDE0729934CFF0049D98E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3AD3AEE429931B220095CB14 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +98,7 @@
 				3AD3AF0029931B240095CB14 /* SequisTests */,
 				3AD3AF0A29931B240095CB14 /* SequisUITests */,
 				3AD3AEEE29931B220095CB14 /* Products */,
+				3A5DDE0729934CFF0049D98E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +168,8 @@
 		3AD3AF1C29931B960095CB14 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3A5DDE0E2993524C0049D98E /* CommonNetworking */,
+				3AD3AF2029933F0F0095CB14 /* CommonUtilities */,
 				3AD3AF1F299326B50095CB14 /* CommonUI */,
 			);
 			path = Common;
@@ -171,6 +191,12 @@
 			dependencies = (
 			);
 			name = Sequis;
+			packageProductDependencies = (
+				3A5DDE0829934CFF0049D98E /* CommonUI */,
+				3A5DDE0A29934D030049D98E /* MainFeature */,
+				3A5DDE0C29934D070049D98E /* CommonUtilities */,
+				3A5DDE0F29935D000049D98E /* CommonNetworking */,
+			);
 			productName = Sequis;
 			productReference = 3AD3AEED29931B220095CB14 /* Sequis.app */;
 			productType = "com.apple.product-type.application";
@@ -611,6 +637,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A5DDE0829934CFF0049D98E /* CommonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonUI;
+		};
+		3A5DDE0A29934D030049D98E /* MainFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainFeature;
+		};
+		3A5DDE0C29934D070049D98E /* CommonUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonUtilities;
+		};
+		3A5DDE0F29935D000049D98E /* CommonNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonNetworking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3AD3AEE529931B220095CB14 /* Project object */;
 }

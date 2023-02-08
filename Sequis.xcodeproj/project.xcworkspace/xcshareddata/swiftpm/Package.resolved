@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "impose",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hainayanda/Impose.git",
+      "state" : {
+        "revision" : "0fae1cee9b309440dd2de1e2d9a35bdf740e268d",
+        "version" : "3.1.4"
+      }
+    }
+  ],
+  "version" : 2
+}

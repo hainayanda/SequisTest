@@ -11,27 +11,15 @@ import CommonUI
 // MARK: MainViewModel
 
 class MainViewModel: ObservableObject {
-    @Published private(set) var items: [LabeledImageModel] = []
+    
+    @Published var items: [LabeledImageModel] = []
     
     init(items: [LabeledImageModel]) {
         self.items = items
     }
     
     // override this
-    func onAppear(for item: LabeledImageModel) {
-        guard item.id == items.last?.id else { return }
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.items.append(
-                LabeledImageModel(
-                    id: "\(Int.random(in: 1000..<2000))",
-                    image: Bundle.module.image(name: "Test"),
-                    title: "Author",
-                    content: "Karen Armstrong"
-                )
-            )
-        }
-    }
+    func onAppear(for item: LabeledImageModel) { }
 }
 
 // MARK: MainView

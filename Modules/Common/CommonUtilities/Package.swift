@@ -4,28 +4,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "MainFeature",
+    name: "CommonUtilities",
     platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "MainFeature",
-            targets: ["MainFeature"]),
+            name: "CommonUtilities",
+            targets: ["CommonUtilities"]),
     ],
     dependencies: [
-        .package(name: "CommonUI", path: "../Common/CommonUI"),
-        .package(name: "CommonUtilities", path: "../Common/CommonUtilities")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/hainayanda/Impose.git", .upToNextMajor(from: "3.1.4"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "MainFeature",
-            dependencies: ["CommonUI"]),
+            name: "CommonUtilities",
+            dependencies: ["Impose"]),
         .testTarget(
-            name: "MainFeatureTests",
-            dependencies: ["MainFeature"]),
+            name: "CommonUtilitiesTests",
+            dependencies: ["CommonUtilities"]),
     ]
 )

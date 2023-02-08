@@ -12,7 +12,7 @@ import SwiftUI
 
 public enum ImageConvertibleType {
     case asset(name: String, bundle: Bundle)
-    case url(URL)
+    case url(URL?)
     case system(name: String)
     case uiImage(UIImage)
 }
@@ -35,6 +35,10 @@ struct BundleImage: ImageConvertible {
 // MARK: ImageConvertible extensions implementation
 
 extension URL: ImageConvertible {
+    public var type: ImageConvertibleType { .url(self) }
+}
+
+extension Optional: ImageConvertible where Wrapped == URL {
     public var type: ImageConvertibleType { .url(self) }
 }
 
