@@ -13,6 +13,7 @@ import CommonUI
 class MainViewModel: ObservableObject {
     
     @Published var labeledImages: [LabeledImageModel] = []
+    @Published var loadingState: LoadingState = .loading
     
     init(items: [LabeledImageModel]) {
         self.labeledImages = items
@@ -27,6 +28,13 @@ class MainViewModel: ObservableObject {
     // override this
     func destination(for item: LabeledImageModel) -> AnyView {
         AnyView(Text("Override this for navigation"))
+    }
+}
+
+extension MainViewModel {
+    enum LoadingState {
+        case loaded
+        case loading
     }
 }
 
@@ -51,6 +59,9 @@ struct MainView: View {
                             viewModel.onAppear(for: item)
                         }
                     }
+                }
+                if viewModel.loadingState == .loading {
+                    ProgressView()
                 }
             }
             .animation(.default, value: viewModel.labeledImages)

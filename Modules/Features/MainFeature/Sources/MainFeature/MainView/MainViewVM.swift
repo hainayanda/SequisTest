@@ -31,7 +31,11 @@ class MainViewVM: MainViewModel {
     }
     
     override func onAppear(for item: LabeledImageModel) {
-        guard labeledImages.last?.id == item.id else { return }
+        guard loadingState == .loaded,
+              labeledImages.last?.id == item.id else {
+            return
+        }
+        loadingState = .loading
         loadPage(page + 1)
     }
     
@@ -52,7 +56,7 @@ class MainViewVM: MainViewModel {
                 self.items = items
                 RunLoop.main.perform { [weak self] in
                     self?.labeledImages.append(contentsOf: items.mapLabelImageModels(page: page))
-                    self?.objectWillChange.send()
+                    self?.loadingState = .loaded
                 }
             case .failure(let reason):
                 print(reason)
