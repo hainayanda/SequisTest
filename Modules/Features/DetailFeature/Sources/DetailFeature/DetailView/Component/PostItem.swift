@@ -8,7 +8,7 @@
 import SwiftUI
 import CommonUI
 
-struct PostItemModel: Identifiable {
+struct PostItemModel: Identifiable, Equatable {
     typealias ID = String
     
     let id: String

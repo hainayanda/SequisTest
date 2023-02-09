@@ -53,6 +53,7 @@ struct MainView: View {
                     }
                 }
             }
+            .animation(.default, value: viewModel.labeledImages)
             .padding()
         }
         .navigationTitle("Image List")

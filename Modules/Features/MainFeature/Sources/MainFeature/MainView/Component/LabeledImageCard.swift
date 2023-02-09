@@ -10,13 +10,17 @@ import CommonUI
 
 // MARK: LabeledImageModel
 
-struct LabeledImageModel: Identifiable {
+struct LabeledImageModel: Identifiable, Equatable {
     typealias ID = String
     
     let id: String
     let image: ImageConvertible
     let title: String
     let content: String
+    
+    static func == (lhs: LabeledImageModel, rhs: LabeledImageModel) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 // MARK: LabeledImageCard

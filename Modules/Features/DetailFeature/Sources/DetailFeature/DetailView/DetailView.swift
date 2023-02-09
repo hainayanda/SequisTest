@@ -47,20 +47,18 @@ public struct DetailView: View {
             ImageCompatible(viewModel.image)
                 .resizable()
                 .scaledToFit()
-            List {
-                ForEach(viewModel.lists) { item in
-                    PostItem(viewModel: item)
-                        .swipeActions(edge: .trailing) {
-                            Button {
-                                viewModel.onDeleting(item: item)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                            .tint(.orange)
+            List(viewModel.lists, id: \.id) { item in
+                PostItem(viewModel: item)
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            viewModel.onDeleting(item: item)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
-                }
-                
+                        .tint(.orange)
+                    }
             }
+            .animation(.easeIn, value: viewModel.lists)
             .listStyle(.plain)
         }
         .navigationTitle("Image Detail")
