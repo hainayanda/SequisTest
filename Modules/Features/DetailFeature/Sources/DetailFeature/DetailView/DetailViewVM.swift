@@ -15,6 +15,7 @@ class DetailViewVM: DetailViewModel {
     @Injected private var service: DetailAPI
     private let item: Item
     private var isLoaded: Bool = false
+    private var posts: [Post] = []
     
     init(item: Item) {
         self.item = item
@@ -28,7 +29,20 @@ class DetailViewVM: DetailViewModel {
     }
     
     override func onDeleting(item: PostItemModel) {
-        self.lists.removeAll { $0.id == item.id }
+        guard let post = posts.first(where: { $0.id == item.id }) else { return }
+        Task.detached { [weak self] in
+            guard let self else { return }
+            let result = await self.service.deletePost(for: self.item, post: post)
+            switch result {
+            case .success:
+                RunLoop.main.perform { [weak self] in
+                    self?.posts.removeAll { $0.id == item.id }
+                    self?.lists.removeAll { $0.id == item.id }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     override func onAddingNewItem() {
@@ -38,6 +52,7 @@ class DetailViewVM: DetailViewModel {
             switch result {
             case .success(let post):
                 RunLoop.main.perform { [weak self] in
+                    self?.posts.insert(post, at: 0)
                     self?.lists.insert(post.mapToPostItemModel(), at: 0)
                 }
             case .failure(let error):
@@ -53,6 +68,7 @@ class DetailViewVM: DetailViewModel {
             switch result {
             case .success(let posts):
                 RunLoop.main.perform { [weak self] in
+                    self?.posts = posts
                     self?.lists = posts.mapToPostItemModels()
                 }
             case .failure(let error):

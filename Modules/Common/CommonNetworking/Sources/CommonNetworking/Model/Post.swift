@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Post: Codable {
+public struct Post: Codable, Equatable {
     public let id, author, content: String
     public let time: Date
 }

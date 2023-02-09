@@ -30,7 +30,8 @@ let package = Package(
             name: "DetailFeatureTests",
             dependencies: [
                 "DetailFeature",
-                .product(name: "CommonTestUtilities", package: "CommonUtilities")
+                .product(name: "CommonTestUtilities", package: "CommonUtilities"),
+                .product(name: "CommonNetworkingMock", package: "CommonNetworking")
             ]
         )
     ]

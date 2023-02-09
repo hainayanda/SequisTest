@@ -12,6 +12,7 @@ import RealmSwift
 public protocol DetailAPI {
     func allPosts(for item: Item) async -> Result<[Post], APIError>
     func addNewPost(for item: Item) async -> Result<Post, APIError>
+    func deletePost(for item: Item, post: Post) async -> Result<Bool, APIError>
 }
 
 class DetailService: APICaller, DetailAPI {
@@ -42,6 +43,24 @@ class DetailService: APICaller, DetailAPI {
                 realm.add(PersistentPost(item: item, post: newItem))
             }
             return .success(newItem)
+        } catch let apiError as APIError {
+            return .failure(apiError)
+        } catch {
+            return .failure(.unexpectedStatusCode(-1))
+        }
+    }
+    
+    @MainActor
+    func deletePost(for item: Item, post: Post) async -> Result<Bool, APIError> {
+        do {
+            let realm = try await Realm()
+            guard let result = realm.objects(PersistentPost.self).where({ $0.id == post.id }).first else {
+                return .success(false)
+            }
+            try realm.write {
+                realm.delete(result)
+            }
+            return .success(true)
         } catch let apiError as APIError {
             return .failure(apiError)
         } catch {

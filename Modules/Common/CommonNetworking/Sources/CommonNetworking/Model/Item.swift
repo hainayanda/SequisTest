@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Item: Codable {
+public struct Item: Codable, Equatable {
     public let id, author: String
     public let width, height: Int
     public let url, downloadURL: String
