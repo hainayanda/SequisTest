@@ -51,7 +51,7 @@ class MainViewVM: MainViewModel {
                 self.page = page
                 self.items = items
                 RunLoop.main.perform { [weak self] in
-                    self?.labeledImages.append(contentsOf: items.toLabelImageModels(page: page))
+                    self?.labeledImages.append(contentsOf: items.mapLabelImageModels(page: page))
                     self?.objectWillChange.send()
                 }
             case .failure(let reason):
@@ -62,13 +62,13 @@ class MainViewVM: MainViewModel {
 }
 
 private extension Array where Element == Item {
-    func toLabelImageModels(page: Int) -> [LabeledImageModel] {
-        map { $0.toLabelImageModel(page: page) }
+    func mapLabelImageModels(page: Int) -> [LabeledImageModel] {
+        map { $0.mapLabelImageModel(page: page) }
     }
 }
 
 private extension Item {
-    func toLabelImageModel(page: Int) -> LabeledImageModel {
+    func mapLabelImageModel(page: Int) -> LabeledImageModel {
         LabeledImageModel(id: "\(page)_\(id)", image: URL(string: downloadURL), title: "Author", content: author)
     }
 }
