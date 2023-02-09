@@ -34,7 +34,7 @@ class DetailViewVM: DetailViewModel {
     override func onAddingNewItem() {
         Task.detached { [weak self] in
             guard let self else { return }
-            let result = await self.service.addNewItem()
+            let result = await self.service.addNewPost(for: self.item)
             switch result {
             case .success(let post):
                 RunLoop.main.perform { [weak self] in

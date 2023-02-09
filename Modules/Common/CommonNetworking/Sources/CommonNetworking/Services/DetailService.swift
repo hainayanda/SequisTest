@@ -7,10 +7,11 @@
 
 import Foundation
 import CommonUtilities
+import RealmSwift
 
 public protocol DetailAPI {
     func allPosts(for item: Item) async -> Result<[Post], APIError>
-    func addNewItem() async -> Result<Post, APIError>
+    func addNewPost(for item: Item) async -> Result<Post, APIError>
 }
 
 class DetailService: APICaller, DetailAPI {
@@ -19,9 +20,12 @@ class DetailService: APICaller, DetailAPI {
     
     var baseUrl: String { "" }
     
+    @MainActor
     func allPosts(for item: Item) async -> Result<[Post], APIError> {
         do {
-            return .success(try randomizePosts(count: Int.random(in: 10..<30)))
+            let realm = try await Realm()
+            let results = realm.objects(PersistentPost.self).where { $0.itemId == item.id }
+            return .success(results.mapToPosts())
         } catch let apiError as APIError {
             return .failure(apiError)
         } catch {
@@ -29,21 +33,56 @@ class DetailService: APICaller, DetailAPI {
         }
     }
     
-    func addNewItem() async -> Result<Post, APIError> {
+    @MainActor
+    func addNewPost(for item: Item) async -> Result<Post, APIError> {
         do {
-            guard let newItem = try randomizePosts(count: 1).first else {
-                return .failure(.unexpectedStatusCode(-1))
+            let newItem = try randomizePost()
+            let realm = try await Realm()
+            try realm.write {
+                realm.add(PersistentPost(item: item, post: newItem))
             }
             return .success(newItem)
         } catch let apiError as APIError {
             return .failure(apiError)
         } catch {
             return .failure(.unexpectedStatusCode(-1))
+            
         }
     }
 }
 
-private func randomizePosts(count: Int) throws -> [Post] {
+// MARK: Service Simulation
+
+class PersistentPost: Object {
+    @Persisted var itemId: String
+    @Persisted(primaryKey: true) var id: String
+    @Persisted var author: String
+    @Persisted var content: String
+    @Persisted var time: Date
+}
+
+extension PersistentPost {
+    convenience init(item: Item, post: Post) {
+        self.init()
+        self.itemId = item.id
+        self.id = post.id
+        self.author = post.author
+        self.content = post.content
+        self.time = post.time
+    }
+    
+    func mapToPost() -> Post {
+        Post(id: id, author: author, content: content, time: time)
+    }
+}
+
+extension Results where Element == PersistentPost {
+    func mapToPosts() -> [Post] {
+        map { $0.mapToPost() }
+    }
+}
+
+private func randomizePost() throws -> Post {
     let firstNames = try getList(from: "firstNames")
     let lastNames = try getList(from: "lastNames")
     let nouns = try getList(from: "nouns")
@@ -51,9 +90,7 @@ private func randomizePosts(count: Int) throws -> [Post] {
     guard !firstNames.isEmpty, !lastNames.isEmpty, !nouns.isEmpty, !verbs.isEmpty else {
         throw APIError.unexpectedStatusCode(-1)
     }
-    return try (0..<count).map { _ in
-        try randomizePost(firstNames: firstNames, lastNames: lastNames, nouns: nouns, verbs: verbs)
-    }
+    return try randomizePost(firstNames: firstNames, lastNames: lastNames, nouns: nouns, verbs: verbs)
 }
 
 private func randomizePost(firstNames: [String], lastNames: [String], nouns: [String], verbs: [String]) throws -> Post {
@@ -72,7 +109,7 @@ private func randomizePost(firstNames: [String], lastNames: [String], nouns: [St
         id: UUID().uuidString,
         author: "\(firstName) \(lastName)",
         content: content,
-        time: Date.now.addingTimeInterval(-TimeInterval.random(in: 0..<600000))
+        time: Date.now
     )
 }
 
