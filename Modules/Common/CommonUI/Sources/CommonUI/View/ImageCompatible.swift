@@ -16,6 +16,7 @@ public enum ImageConvertibleType {
     case url(URL?)
     case system(name: String)
     case uiImage(UIImage)
+    case image(Image)
 }
 
 // MARK: ImageConvertible
@@ -48,6 +49,10 @@ extension ImageCompatible {
         let capInsets: EdgeInsets
         let resizingMode: Image.ResizingMode
     }
+}
+
+extension Image: ImageConvertible {
+    public var type: ImageConvertibleType { .image(self) }
 }
 
 // MARK: ImageCompatible
@@ -91,6 +96,8 @@ public struct ImageCompatible: View {
             makeResizableIfNeeded(for: Image(systemName: name))
         case .uiImage(let image):
             makeResizableIfNeeded(for: Image(uiImage: image))
+        case .image(let image):
+            makeResizableIfNeeded(for: image)
         }
     }
     
@@ -118,7 +125,7 @@ public struct ImageCompatible: View {
 
 struct ImageCompatible_Previews: PreviewProvider {
     static var previews: some View {
-        ImageCompatible(Bundle.module.image(name: "Test"))
+        ImageCompatible(Image(systemName: "smiley"))
             .resizable()
             .aspectRatio(contentMode: .fit)
     }

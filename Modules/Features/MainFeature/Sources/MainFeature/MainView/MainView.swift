@@ -76,7 +76,7 @@ struct MainView_Previews: PreviewProvider {
                     items: (0..<20).map {
                         LabeledImageModel(
                             id: "\($0)",
-                            image: Bundle.module.image(name: "Test"),
+                            image: Image(systemName: "smiley"),
                             title: "Author",
                             content: "Amelia Earheart"
                         )
