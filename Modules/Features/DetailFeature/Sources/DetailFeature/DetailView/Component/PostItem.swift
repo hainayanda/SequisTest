@@ -8,21 +8,36 @@
 import SwiftUI
 import CommonUI
 
+struct PostItemModel: Identifiable {
+    typealias ID = String
+    
+    let id: String
+    let name: String
+    let content: String
+    let footNote: String
+}
+
 struct PostItem: View {
+    
+    let viewModel: PostItemModel
+    
+    init(viewModel: PostItemModel) {
+        self.viewModel = viewModel
+    }
     var body: some View {
         HStack(spacing: 8) {
             VStack {
-                CircledInitial("Nayanda Haberty")
+                CircledInitial(viewModel.name)
                 Spacer()
             }
             .frame(width: 64)
             
             VStack(alignment: .leading, spacing: 8) {
-                Title2("Author")
+                Title2(viewModel.name)
                     .foregroundColor(.appText)
-                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                Text(viewModel.content)
                     .foregroundColor(.appText)
-                FootNote("yesterday")
+                FootNote(viewModel.footNote)
                     .foregroundColor(.gray)
             }
             
@@ -34,7 +49,14 @@ struct PostItem: View {
 
 struct PostItem_Previews: PreviewProvider {
     static var previews: some View {
-        PostItem()
+        PostItem(
+            viewModel: PostItemModel(
+                id: "1",
+                name: "Nayanda Haberty",
+                content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                footNote: "yesterday"
+            )
+        )
         
     }
 }

@@ -13,10 +13,18 @@ import CommonUI
 class DetailViewModel: ObservableObject {
     
     let image: ImageConvertible
+    @Published var lists: [PostItemModel]
     
-    init(image: ImageConvertible) {
+    init(image: ImageConvertible, lists: [PostItemModel]) {
         self.image = image
+        self.lists = lists
     }
+    
+    // override this
+    func onDeleting(item: PostItemModel) { }
+    
+    // override this
+    func onAddingNewItem() { }
 }
 
 struct Number: Identifiable {
@@ -32,31 +40,31 @@ public struct DetailView: View {
     }
     
     public var body: some View {
-            VStack {
-                ImageCompatible(viewModel.image)
-                    .resizable()
-                    .scaledToFit()
-                List {
-                    ForEach(0..<20) { _ in
-                        PostItem()
-                            .swipeActions(edge: .trailing) {
-                                Button {
-                                    print("Message deleted")
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                                .tint(.orange)
+        VStack {
+            ImageCompatible(viewModel.image)
+                .resizable()
+                .scaledToFit()
+            List {
+                ForEach(viewModel.lists) { item in
+                    PostItem(viewModel: item)
+                        .swipeActions(edge: .trailing) {
+                            Button {
+                                viewModel.onDeleting(item: item)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
                             }
-                    }
-                    
+                            .tint(.orange)
+                        }
                 }
-                .listStyle(.plain)
+                
             }
+            .listStyle(.plain)
+        }
         .navigationTitle("Image Detail")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             Button {
-                print("Message Added")
+                viewModel.onAddingNewItem()
             } label: {
                 Label("Add", systemImage: "plus")
             }
@@ -68,7 +76,14 @@ struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(
             viewModel: DetailViewModel(
-                image: URL(string: "https://zonneveld.dev/wp-content/uploads/2019/10/swiftUI-banner.jpg")
+                image: URL(string: "https://zonneveld.dev/wp-content/uploads/2019/10/swiftUI-banner.jpg"), lists: (0..<20).map {
+                    PostItemModel(
+                        id: "\($0)",
+                        name: "Nayanda Haberty",
+                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        footNote: "yesterday"
+                    )
+                }
             )
         )
     }
