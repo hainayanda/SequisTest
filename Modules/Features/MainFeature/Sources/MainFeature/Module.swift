@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
-// MARK: Factory
+// MARK: Abstract Factory
 
 public class Module: ObservableObject {
     
     public init() { }
     
-    public func createMainView() -> MainView {
+    public func createMainView() -> AnyView {
         let router = MainViewRouter()
         let vm = MainViewVM(router: router)
-        return MainView(viewModel: vm)
+        return AnyView(MainView(viewModel: vm))
     }
 }

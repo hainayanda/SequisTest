@@ -10,6 +10,7 @@ import MainFeature
 import DetailFeature
 import CommonNetworking
 import Impose
+import SharedFeatureDependencies
 
 @main
 struct SequisApp: App {
@@ -29,7 +30,7 @@ struct SequisApp: App {
         URLCache.shared.memoryCapacity = 52_428_800
         URLCache.shared.diskCapacity = 104_857_600
         
-        Injector.shared.addTransient(for: DetailFeature.ModuleFactory.self, DetailFeature.Module())
-        Injector.shared.addTransient(for: MainAPI.self, MainService())
+        Injector.shared.addTransient(for: DetailFeatureModuleFactory.self, DetailFeature.Module())
+        Injector.shared.provide(using: CommonNetworking.Module())
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import CommonNetworking
-import DetailFeature
+import SharedFeatureDependencies
 import Impose
 
 protocol MainViewRouting {
@@ -17,9 +17,9 @@ protocol MainViewRouting {
 
 class MainViewRouter: MainViewRouting {
     
-    @Injected var detailModule: DetailFeature.Module
+    @Injected var detailModule: DetailFeatureModuleFactory
     
     func destination(for item: Item) -> AnyView {
-        AnyView(detailModule.createDetailView())
+        AnyView(detailModule.createDetailView(for: item))
     }
 }

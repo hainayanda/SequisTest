@@ -15,6 +15,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "SharedFeatureDependencies", path: "../Common/SharedFeatureDependencies"),
         .package(name: "CommonUI", path: "../Common/CommonUI"),
         .package(name: "CommonUtilities", path: "../Common/CommonUtilities"),
         .package(name: "CommonNetworking", path: "../Common/CommonNetworking")
@@ -24,7 +25,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "MainFeature",
-            dependencies: ["CommonUI", "CommonUtilities", "CommonNetworking"]),
+            dependencies: ["CommonUI", "CommonUtilities", "CommonNetworking", "SharedFeatureDependencies"]),
         .testTarget(
             name: "MainFeatureTests",
             dependencies: ["MainFeature",

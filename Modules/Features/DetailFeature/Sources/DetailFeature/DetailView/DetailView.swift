@@ -21,6 +21,9 @@ class DetailViewModel: ObservableObject {
     }
     
     // override this
+    func onLoaded() { }
+    
+    // override this
     func onDeleting(item: PostItemModel) { }
     
     // override this
@@ -33,10 +36,10 @@ struct Number: Identifiable {
 
 public struct DetailView: View {
     
-    @ObservedObject var viewModel: DetailViewModel
+    @StateObject var viewModel: DetailViewModel
     
     init(viewModel: DetailViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     public var body: some View {
@@ -68,6 +71,9 @@ public struct DetailView: View {
             } label: {
                 Label("Add", systemImage: "plus")
             }
+        }
+        .onAppear {
+            viewModel.onLoaded()
         }
     }
 }

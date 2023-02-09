@@ -19,6 +19,9 @@ class MainViewModel: ObservableObject {
     }
     
     // override this
+    func onLoaded() { }
+    
+    // override this
     func onAppear(for item: LabeledImageModel) { }
     
     // override this
@@ -29,15 +32,15 @@ class MainViewModel: ObservableObject {
 
 // MARK: MainView
 
-public struct MainView: View {
+struct MainView: View {
     
-    @ObservedObject var viewModel: MainViewModel
+    @StateObject var viewModel: MainViewModel
     
     init(viewModel: MainViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
-    public var body: some View {
+    var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 24) {
                 ForEach(viewModel.labeledImages) { item in
@@ -55,6 +58,10 @@ public struct MainView: View {
         .navigationTitle("Image List")
         .navigationBarTitleDisplayMode(.large)
         .background(Color.appBackground)
+        .onAppear {
+            viewModel.onLoaded()
+        }
+        
     }
 }
 

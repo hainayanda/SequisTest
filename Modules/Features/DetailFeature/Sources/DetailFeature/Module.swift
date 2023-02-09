@@ -6,29 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
+import CommonNetworking
+import SharedFeatureDependencies
 
-// MARK: Factory
+// MARK: Abstract Factory
 
-public protocol ModuleFactory {
-    func createDetailView() -> DetailView
-}
-
-public class Module: ModuleFactory {
+public class Module: DetailFeatureModuleFactory {
     
     public init() { }
     
-    public func createDetailView() -> DetailView {
-        DetailView(
-            viewModel: DetailViewModel(
-                image: URL(string: "https://zonneveld.dev/wp-content/uploads/2019/10/swiftUI-banner.jpg"), lists: (0..<20).map {
-                    PostItemModel(
-                        id: "\($0)",
-                        name: "Nayanda Haberty",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                        footNote: "yesterday"
-                    )
-                }
-            )
-        )
+    public func createDetailView(for item: Item) -> AnyView {
+        let detailView = DetailView(viewModel: DetailViewVM(item: item))
+        return AnyView(detailView)
     }
 }

@@ -23,7 +23,11 @@ class MainViewVM: MainViewModel {
     init(router: MainViewRouting) {
         self.router = router
         super.init(items: [])
-        loadPage(0)
+    }
+    
+    override func onLoaded() {
+        guard page == 0 else { return }
+        loadPage(page)
     }
     
     override func onAppear(for item: LabeledImageModel) {
@@ -48,6 +52,7 @@ class MainViewVM: MainViewModel {
                 self.items = items
                 RunLoop.main.perform { [weak self] in
                     self?.labeledImages.append(contentsOf: items.toLabelImageModels(page: page))
+                    self?.objectWillChange.send()
                 }
             case .failure(let reason):
                 print(reason)
