@@ -2,8 +2,8 @@
 
 This is a homework test for SequisLife mobile engineer test. Here is a preview of what is being done in this project:
 
-![](https://github.com/Your_Repository_Name/MainScreen.gif)
-![](https://github.com/hainayanda/SequisTest/DetailScreen.gif)
+![](https://raw.githubusercontent.com/hainayanda/SequisTest/main/MainScreen.gif)
+![](https://raw.githubusercontent.com/hainayanda/SequisTest/main/DetailScreen.gif)
 
 ## Project Structure
 
@@ -22,7 +22,7 @@ There is one module that is on the bottom of the layers and can be imported by a
 Since feature modules in the same layer might need to use some part of each other, there is an intermediate layer that acts as a mediator for each feature module which is `SharedFeatureDependencies`.
 To better understand the structure, please refer to this diagram below:
 
-![](https://github.com/hainayanda/SequisTest/Modules.jpg)
+![](https://raw.githubusercontent.com/hainayanda/SequisTest/main/Modules.jpg)
 
 ### Main Feature and Detail Feature
 
